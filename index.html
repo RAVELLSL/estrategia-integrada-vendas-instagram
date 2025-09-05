@@ -1,0 +1,725 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="color-scheme" content="dark light" />
+  <title>Estratégia Integrada de Vendas – Instagram & Redes-Sociais</title>
+  <meta name="description" content="Biblioteca clean e responsiva para acessar PDF, Slides e Áudios sobre Estratégia Integrada de Vendas para Instagram & Redes-Sociais." />
+  <meta name="theme-color" content="#dd2a7b" />
+
+  <!-- BOOT DE TEMA: aplica 'light' antes do CSS pintar a página -->
+  <script>
+    (function () {
+      try {
+        var saved = localStorage.getItem("theme");
+        var prefersLight = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches;
+        if (saved === "light" || (!saved && prefersLight)) {
+          document.documentElement.classList.add("light");
+        }
+      } catch(e) {/* sem bloqueio */}
+    })();
+  </script>
+
+  <style>
+    /* ===============================
+       TOKENS • CLEAN THEME
+       =============================== */
+    :root{
+      --bg:#0f1016; --bg-2:#151827; --txt:#f6f7fb; --muted:#c9cbe0;
+      --card:#171b2a; --stroke:#2a3050;
+      --radius:14px;
+      --brand-1:#f58529; --brand-2:#dd2a7b; --brand-3:#8134af; --brand-4:#515bd4;
+      --cta: linear-gradient(135deg,var(--brand-2),var(--brand-4));
+      --shadow-s: 0 2px 10px rgba(0,0,0,.18);
+      --shadow-m: 0 8px 24px rgba(0,0,0,.22);
+    }
+    html.light{
+      --bg:#ffffff; --bg-2:#f7f8fc; --txt:#11131a; --muted:#4a4f66;
+      --card:#ffffff; --stroke:#e6e8f2;
+      --shadow-s: 0 2px 8px rgba(18,18,23,.06);
+      --shadow-m: 0 10px 26px rgba(18,18,23,.08);
+    }
+
+    /* ===============================
+       BASE
+       =============================== */
+    *{ box-sizing:border-box }
+    html, body{ height:100% }
+    :root{ scroll-behavior:smooth }
+    @media (prefers-reduced-motion: reduce){
+      *{ animation:none !important; transition:none !important; scroll-behavior:auto }
+    }
+    body{
+      margin:0;
+      background:
+        radial-gradient(1200px 700px at 110% -10%, rgba(221,42,123,.12), transparent 60%),
+        radial-gradient(1000px 600px at -10% 110%, rgba(129,52,175,.15), transparent 55%),
+        var(--bg);
+      color:var(--txt);
+      font: 400 16px/1.7 system-ui, -apple-system, Segoe UI, Roboto, "Helvetica Neue", Arial, "Noto Sans";
+    }
+    html.light body{
+      background:
+        radial-gradient(1200px 700px at 110% -10%, rgba(221,42,123,.08), transparent 60%),
+        radial-gradient(1000px 600px at -10% 110%, rgba(129,52,175,.08), transparent 55%),
+        var(--bg);
+    }
+    .container{ max-width:1100px; margin:0 auto; padding:0 16px }
+
+    a{ color:inherit }
+    :focus-visible{ outline:2px solid #8b7cff; outline-offset:2px }
+
+    /* utilidade de acessibilidade */
+    .sr-only{ position:absolute; left:-9999px }
+
+    /* ===============================
+       NAVBAR
+       =============================== */
+    .nav{
+      position:sticky; top:0; z-index:50;
+      backdrop-filter: blur(8px);
+      background: rgba(21,22,34,.55);
+      border-bottom:1px solid var(--stroke);
+    }
+    html.light .nav{
+      background: rgba(255,255,255,.85);
+    }
+    .nav-inner{ display:grid; grid-template-columns: 1fr auto auto; gap:12px; align-items:center; padding:10px 0 }
+    .brand{ display:flex; gap:12px; align-items:center }
+    .logo{
+      inline-size:36px; block-size:36px; border-radius:10px;
+      background: conic-gradient(from 180deg, var(--brand-1), var(--brand-2), var(--brand-3), var(--brand-4), var(--brand-1));
+      box-shadow: var(--shadow-m);
+    }
+    .title{ font-weight:700; letter-spacing:.2px; font-size: clamp(1.05rem, 2vw, 1.2rem) }
+
+    /* campo de busca */
+    .search{
+      display:flex; align-items:center; gap:8px; padding:6px 10px;
+      border:1px solid var(--stroke); border-radius:12px; background:var(--card); min-width:220px
+    }
+    .search input[type="search"]{
+      flex:1; background:transparent; border:0; color:var(--txt);
+      font-weight:600; min-width:180px; outline:none
+    }
+    .search svg{ opacity:.7 }
+
+    /* ===============================
+       BOTÕES (toolbar e ações)
+       =============================== */
+    .btn{
+      display:inline-flex; align-items:center; gap:8px;
+      padding:10px 12px; border-radius:12px; border:1px solid var(--stroke);
+      background:var(--card); color:var(--txt); cursor:pointer; font-weight:700;
+      transition:filter .15s ease, transform .06s ease;
+    }
+    .btn.secondary{ background:transparent }
+    a.btn{ text-decoration:none }
+    .btn:hover{ filter:brightness(1.05) }
+    .btn:active{ transform: translateY(1px) }
+
+    /* ===============================
+       HERO
+       =============================== */
+    .hero{ background: linear-gradient(135deg, var(--brand-1), var(--brand-2), var(--brand-3), var(--brand-4)) }
+    html.light .hero{
+      background: linear-gradient(135deg, rgba(245,133,41,.25), rgba(221,42,123,.25), rgba(129,52,175,.25), rgba(81,91,212,.25));
+    }
+    .hero-inner{
+      padding:40px 0;
+      display:flex; flex-direction:column; align-items:center; justify-content:center; gap:12px;
+      text-align:center;
+    }
+    .hero h1{
+      margin:0 0 6px 0; font-weight:800; line-height:1.2;
+      font-size: clamp(1.7rem, 3.2vw, 2.4rem); color:#fff; max-width: 22ch; text-wrap: balance;
+    }
+
+    /* ===============================
+       CONTROLS
+       =============================== */
+    .controls{ padding:12px 0 8px; display:flex; flex-wrap:wrap; gap:10px; align-items:center; justify-content: space-between }
+    .filters{ display:flex; gap:8px; flex-wrap:wrap }
+    .chip{
+      border:1px solid var(--stroke); background:var(--card); color:var(--txt);
+      padding:8px 12px; border-radius:999px; cursor:pointer; user-select:none; font-weight:700; font-size:.9rem;
+      transition:background .15s ease, color .15s ease, border-color .15s ease;
+    }
+    html.light .chip[aria-pressed="true"]{ background:#efe9ff; color:#3b2b66; border-color:#d6c9ff }
+    .chip[aria-pressed="true"]{ background:#2a2240; color:#e9e5ff; border-color:#4b3b7a }
+    html.light .chip{ background:#fff; color:#111 }
+    .select{
+      background:var(--card); color:var(--txt); border:1px solid var(--stroke);
+      border-radius:12px; padding:8px 10px; font-weight:700
+    }
+    .view-toggle .btn{ padding:10px 12px; min-width:42px }
+
+    /* ===============================
+       GRID & CARDS
+       =============================== */
+    .wrap{ margin:14px auto 36px }
+    .grid{ display:grid; gap:16px; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); align-items: stretch }
+    .list .grid{ grid-template-columns: 1fr }
+
+    .card{
+      background:var(--card); border:1px solid var(--stroke);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow-s);
+      padding:16px; display:flex; flex-direction:column; gap:12px; transition: transform .2s ease, box-shadow .2s ease;
+    }
+    .card:hover{ transform: translateY(-2px); box-shadow: var(--shadow-m) }
+    .type{ display:inline-flex; align-items:center; gap:8px; font-size:.82rem; color:var(--muted) }
+    .badge{
+      padding:4px 8px; border-radius:999px; font-size:.75rem; font-weight:800; letter-spacing:.2px;
+      background: transparent; border:1px dashed var(--stroke); color: var(--muted);
+    }
+    .card h3{ margin:0; font-size: clamp(1rem, 2vw, 1.12rem); font-weight:600; max-width: 36ch; text-wrap: balance }
+    .meta{ font-size:.86rem; color:var(--muted); display:flex; gap:12px; flex-wrap:wrap }
+    .actions{ display:flex; gap:8px; flex-wrap:wrap }
+    .action{
+      display:inline-flex; align-items:center; gap:8px; padding:10px 12px; border-radius:12px;
+      border:1px solid var(--stroke); background:transparent; color:var(--txt); cursor:pointer; font-weight:600;
+    }
+    .action.primary{ border:none; background: var(--cta); color:#fff }
+
+    /* ===============================
+       MODAL
+       =============================== */
+    .modal{ position: fixed; inset:0; display:none; place-items:center; background:rgba(0,0,0,.6); z-index:100 }
+    .modal.open{ display:grid }
+    .dialog{
+      width:min(96vw, 1100px); height:min(86vh, 820px);
+      background: var(--bg-2); border:1px solid var(--stroke); border-radius:16px; box-shadow: var(--shadow-m);
+      display:flex; flex-direction:column; overflow:hidden; animation: rise .18s ease;
+    }
+    @keyframes rise{ from{ transform: translateY(8px); opacity:.95 } to{ transform: none; opacity:1 } }
+    .dialog-header{
+      display:flex; align-items:center; justify-content:space-between; gap:10px; padding:10px 12px; border-bottom:1px solid var(--stroke);
+      background: linear-gradient(90deg, rgba(245,133,41,.15), rgba(221,42,123,.12), rgba(129,52,175,.12), rgba(81,91,212,.12));
+    }
+    .dialog-header .title{ font-weight:900 }
+    .dialog-body{ position:relative; flex:1; background:var(--bg) }
+    .dialog-body[aria-busy="true"]::after{
+      content:"Carregando…";
+      position:absolute; inset:0; display:grid; place-items:center;
+      background: rgba(0,0,0,.15); color:#fff; font-weight:700;
+    }
+    .dialog-body iframe{ width:100%; height:100%; border:0; background:var(--bg) }
+    .close{ background:transparent; border:1px solid var(--stroke); color:var(--txt); border-radius:10px; padding:8px 10px; font-weight:900; cursor:pointer }
+
+    /* ===============================
+       FOOTER
+       =============================== */
+    footer{ border-top:1px solid var(--stroke); background: var(--bg-2); color: var(--muted); }
+    footer .container{ padding:22px 16px; text-align:center }
+
+    /* ===============================
+       RESPONSIVE
+       =============================== */
+    @media (max-width: 880px){
+      .nav-inner{ grid-template-columns: 1fr; gap:10px }
+      .actions-bar{ grid-column: 1 / -1; display:flex; gap:10px; justify-content:flex-start }
+      .hero-inner{ padding:30px 0 }
+      .search{ order:3 }
+    }
+  </style>
+</head>
+<body>
+  <!-- NAVBAR -->
+  <nav class="nav" role="navigation" aria-label="Barra de ferramentas">
+    <div class="nav-inner container">
+      <div class="brand" aria-label="Identidade do site">
+        <div class="logo" aria-hidden="true"></div>
+        <div class="title">Estratégia Integrada de Vendas</div>
+      </div>
+
+      <div class="search" role="search" aria-label="Busca de materiais">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M21 21l-4.3-4.3M10.5 18a7.5 7.5 0 1 1 0-15 7.5 7.5 0 0 1 0 15z" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        <input id="q" type="search" placeholder="Buscar por título, tipo..." aria-label="Buscar materiais" />
+      </div>
+
+      <div class="actions-bar">
+        <button class="btn secondary" id="themeBtn" aria-label="Alternar modo claro/escuro">🌗 Tema</button>
+        <button class="btn secondary" id="resetBtn" aria-label="Limpar filtros">↺ Limpar</button>
+        <a class="btn secondary" href="#biblioteca" aria-label="Ir para biblioteca">📚 Biblioteca</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-inner container">
+      <h1 id="hero-title">Instagram & Redes-Sociais • Materiais de Apoio</h1>
+    </div>
+  </section>
+
+  <!-- CONTROLS -->
+  <div class="controls container" aria-label="Controles de filtro e visualização">
+    <div class="filters" role="group" aria-label="Filtros por tipo">
+      <button class="chip" data-filter="all" aria-pressed="true">Todos</button>
+      <button class="chip" data-filter="pdf" aria-pressed="false">PDFs</button>
+      <button class="chip" data-filter="slides" aria-pressed="false">Slides</button>
+      <button class="chip" data-filter="audio" aria-pressed="false">Áudios</button>
+    </div>
+    <div style="display:flex; gap:10px; align-items:center;">
+      <label for="sort" class="sr-only">Ordenação</label>
+      <select class="select" id="sort" aria-label="Ordenação">
+        <option value="date_desc">Ordenar: Data (recente)</option>
+        <option value="date_asc">Data (antiga)</option>
+        <option value="name_asc">Nome (A–Z)</option>
+        <option value="name_desc">Nome (Z–A)</option>
+        <option value="type_asc">Tipo (A–Z)</option>
+      </select>
+      <div class="view-toggle" role="group" aria-label="Alternar visualização">
+        <button class="btn secondary" id="viewList" aria-label="Exibir em lista">☰</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- LIBRARY -->
+  <main id="biblioteca" class="wrap container">
+    <div id="grid" class="grid" role="list"></div>
+  </main>
+
+  <!-- MODAL -->
+  <div class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div class="dialog">
+      <div class="dialog-header">
+        <div class="title" id="modal-title">Visualização</div>
+        <div style="display:flex; gap:8px;">
+          <button class="close" id="openNew" title="Abrir em nova aba">↗ Abrir nova aba</button>
+          <button class="close" id="closeModal" aria-label="Fechar visualização (Esc)">✕ Fechar</button>
+        </div>
+      </div>
+      <div class="dialog-body" id="dialogBody" aria-busy="false">
+        <iframe id="preview" title="Pré-visualização do material"></iframe>
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    <div class="container">© 2025 • Estratégia Integrada de Vendas — Instagram & Redes-Sociais</div>
+  </footer>
+
+  <script>
+    /* =====================================
+       UTIL: normaliza links do Google Drive
+       ===================================== */
+    function driveFromAny(u){
+      try{
+        const url = new URL(u);
+        // aceita: /file/d/{ID}/view|preview, /uc?id={ID}, /open?id={ID}, share link, etc.
+        const m = url.pathname.match(/\/file\/d\/([^/]+)/);
+        const id = m ? m[1] : (url.searchParams.get("id") || null);
+        if (!id) return { view: u, download: u };
+        return {
+          view: `https://drive.google.com/file/d/${id}/preview`,
+          download: `https://drive.google.com/uc?export=download&id=${id}`
+        };
+      }catch{
+        return { view: u, download: u };
+      }
+    }
+
+    /* =====================================
+       DADOS: apostilas, slides e PDF
+       ===================================== */
+    const BASE_LIBRARY = [
+      // 6 APOSTILAS (PDFs)
+      (()=>{ const {view,download} = driveFromAny("https://drive.google.com/file/d/1juGByN3gkzCBnIEd7-VgOYbwPcluKyB8/view?usp=sharing"); return {
+        id: "pdf-01-guia-instagram",
+        title: "1. Guia Básico de Utilização do Instagram",
+        type: "pdf", urlView: view, urlDownload: download, dateISO: "2025-09-05"
+      }})(),
+      (()=>{ const {view,download} = driveFromAny("https://drive.google.com/file/d/1pylJqPzwrT1U5muum1apV8cCehETBLb0/view?usp=sharing"); return {
+        id: "pdf-02-empreender-redes",
+        title: "2. Guia Prático Para Empreender Nas Redes Sociais",
+        type: "pdf", urlView: view, urlDownload: download, dateISO: "2025-09-05"
+      }})(),
+      (()=>{ const {view,download} = driveFromAny("https://drive.google.com/file/d/1XObg3lVBIDpE8EMvGPQOT-msuNsn5XzO/view?usp=sharing"); return {
+        id: "pdf-03-vendas-instagram",
+        title: "3. Guia Básico de Vendas Pelo Instagram",
+        type: "pdf", urlView: view, urlDownload: download, dateISO: "2025-09-05"
+      }})(),
+      (()=>{ const {view,download} = driveFromAny("https://drive.google.com/file/d/1L0GiBJKkzjW7PxxnbS1LKEDreicWTjtK/view?usp=sharing"); return {
+        id: "pdf-04-plano-acao-90d",
+        title: "4. Plano de Ação Para 90 Dia de Empreendedorismo Nas Redes Sociais",
+        type: "pdf", urlView: view, urlDownload: download, dateISO: "2025-09-05"
+      }})(),
+      (()=>{ const {view,download} = driveFromAny("https://drive.google.com/file/d/1pa0elONz_fDFdVfXF1yrsRqIDBWtZIxs/view?usp=sharing"); return {
+        id: "pdf-05-plano-semanal",
+        title: "5. Plano Semanal de Conteúdos Para o Instagram",
+        type: "pdf", urlView: view, urlDownload: download, dateISO: "2025-09-05"
+      }})(),
+      (()=>{ const {view,download} = driveFromAny("https://drive.google.com/file/d/1JaWuiylQNN0uG_aNIFIMX0Ft3oEY2e7v/view?usp=sharing"); return {
+        id: "pdf-06-roteiro-direct",
+        title: "6. Roteiro de Vendas Via Direct",
+        type: "pdf", urlView: view, urlDownload: download, dateISO: "2025-09-05"
+      }})(),
+
+      // APRESENTAÇÃO (Slides + PDF)
+      (()=>{ const {view,download} = driveFromAny("https://docs.google.com/presentation/d/1eeHG6D2mo-t_oWdGwbSMN1aQKoBcw6QM/edit?usp=sharing"); return {
+        id: "slides-estrategia",
+        title: "Estratégia Integrada de Vendas Para o Instagram e Redes-Sociais (Slides)",
+        type: "slides", urlView: view, urlDownload: download, dateISO: "2025-09-05"
+      }})(),
+      (()=>{ const {view,download} = driveFromAny("https://drive.google.com/file/d/1o_vtZAjzi4P1vZF900_nO06dIp-xYNhS/view?usp=sharing"); return {
+        id: "pdf-apresentacao",
+        title: "Estratégia Integrada de Vendas Para o Instagram e Redes-Sociais (PDF da Apresentação)",
+        type: "pdf", urlView: view, urlDownload: download, dateISO: "2025-09-05"
+      }})()
+    ];
+
+    /* =====================================
+       ÁUDIOS (resgatados, corrigidos e deduplicados)
+       ===================================== */
+    const AUDIOS = [
+      (()=>{ const {view,download} = driveFromAny("https://drive.google.com/file/d/1xy9-vpeeKc6LM4PEZy9mSLo3X-IzU3a4/preview"); return {
+        id: "audio-01-introducao",
+        title: "1. Guia Básico de Utilização do Instagram",
+        type: "audio", urlView: view, urlDownload: download, dateISO: "2025-09-05"
+      }})(),
+      (()=>{ const {view,download} = driveFromAny("https://drive.google.com/file/d/14-Iwrl7-BZq1KXBl9xFtOz6_JvKJrrgC/preview"); return {
+        id: "audio-02-captacao",
+        title: "2. Guia Prático Para Empreender Nas Redes Sociais",
+        type: "audio", urlView: view, urlDownload: download, dateISO: "2025-09-05"
+      }})(),
+      (()=>{ const {view,download} = driveFromAny("https://drive.google.com/file/d/1AxDnhPtmddFROCVSy4_DJJEOJKsQZize/preview"); return {
+        id: "audio-03-vendas-instagram",
+        title: "3. Guia Básico de Vendas Pelo Instagram",
+        type: "audio", urlView: view, urlDownload: download, dateISO: "2025-09-05"
+      }})(),
+      (()=>{ const {view,download} = driveFromAny("https://drive.google.com/file/d/1RuG43IhWODnIg26zfvKTmXNHo5OBSFWg/preview"); return {
+        id: "audio-04-plano-acao-90d",
+        title: "4. Plano de Ação Para 90 Dia de Empreendedorismo Nas Redes Sociais",
+        type: "audio", urlView: view, urlDownload: download, dateISO: "2025-09-05"
+      }})(),
+      (()=>{ const {view,download} = driveFromAny("https://drive.google.com/file/d/1gzckvPqFImaD9y7dxRt06w5TAqz4q2-J/preview"); return {
+        id: "audio-05-plano-semanal",
+        title: "5. Plano Semanal de Conteúdos Para o Instagram",
+        type: "audio", urlView: view, urlDownload: download, dateISO: "2025-09-05"
+      }})(),
+      (()=>{ const {view,download} = driveFromAny("https://drive.google.com/file/d/1V5sRA5-QKByomFwsSLYzvZ0tFnvq_xtT/preview"); return {
+        id: "audio-06-roteiro-direct",
+        title: "6. Roteiro de Vendas Via Direct",
+        type: "audio", urlView: view, urlDownload: download, dateISO: "2025-09-05"
+      }})()
+    ];
+
+    // Mescla base + áudios
+    const LIBRARY = [...BASE_LIBRARY, ...AUDIOS];
+
+    /* =====================================
+       TEMA: toggle simples + persistência
+       ===================================== */
+    const html = document.documentElement;
+    const themeBtn = document.getElementById("themeBtn");
+    themeBtn.addEventListener("click", () => {
+      const isLight = html.classList.toggle("light");
+      try { localStorage.setItem("theme", isLight ? "light" : "dark"); } catch(e){}
+      themeBtn.setAttribute("aria-pressed", String(isLight));
+    });
+
+    /* =====================================
+       STATE & HELPERS
+       ===================================== */
+    const grid = document.getElementById("grid");
+    const chips = Array.from(document.querySelectorAll(".chip"));
+    const q = document.getElementById("q");
+    const sort = document.getElementById("sort");
+    const resetBtn = document.getElementById("resetBtn");
+    const viewList = document.getElementById("viewList");
+    const wrap = document.querySelector(".wrap");
+
+    const STORAGE_KEY = "lib-state-v1";
+    let state = { filter: "all", query: "", sort: "date_desc", layout: "grid" };
+    try {
+      const saved = JSON.parse(localStorage.getItem(STORAGE_KEY) || "null");
+      if (saved) state = { ...state, ...saved };
+    } catch{}
+
+    function saveState(){ try { localStorage.setItem(STORAGE_KEY, JSON.stringify(state)); } catch{} }
+
+    function formatDate(iso){
+      const d = new Date(iso+"T12:00:00"); // fixa meio-dia para evitar off-by-one
+      return d.toLocaleDateString("pt-BR",{year:"numeric", month:"short", day:"2-digit"});
+    }
+    function dateForSort(iso){ return new Date(iso+"T12:00:00"); }
+    function icon(type){
+      if(type==="pdf") return "📄";
+      if(type==="slides") return "📊";
+      if(type==="audio") return "🎧";
+      return "📎";
+    }
+    function safeTitle(t){ return (t || "").toString() }
+    function sortFn(a,b){
+      const by =
+        state.sort==="date_desc" ? dateForSort(b.dateISO) - dateForSort(a.dateISO) :
+        state.sort==="date_asc"  ? dateForSort(a.dateISO) - dateForSort(b.dateISO) :
+        state.sort==="name_asc"  ? safeTitle(a.title).localeCompare(safeTitle(b.title), "pt-BR", {sensitivity:"base"}) :
+        state.sort==="name_desc" ? safeTitle(b.title).localeCompare(safeTitle(a.title), "pt-BR", {sensitivity:"base"}) :
+        state.sort==="type_asc"  ? a.type.localeCompare(b.type, "pt-BR") : 0;
+      if (by !== 0) return by; // desempate por título, depois id
+      const n = safeTitle(a.title).localeCompare(safeTitle(b.title), "pt-BR", {sensitivity:"base"});
+      if (n !== 0) return n;
+      return a.id.localeCompare(b.id, "pt-BR");
+    }
+    function matches(item){
+      const byFilter = state.filter==="all" || item.type===state.filter;
+      if (!byFilter) return false;
+      if (!state.query) return true;
+      const t = (item.title || "").toLowerCase();
+      return state.query.toLowerCase().split(/\s+/).every(k => t.includes(k));
+    }
+
+    function escapeAttr(s){ return (s||'').replaceAll('"','&quot;'); }
+    function cardHTML(it){
+      return `
+        <article class="card" role="listitem" aria-labelledby="${it.id}-title" id="${it.id}">
+          <div class="type">
+            <span class="badge">${it.type.toUpperCase()}</span>
+            <span aria-hidden="true">•</span>
+            <span>${formatDate(it.dateISO)}</span>
+          </div>
+          <h3 id="${it.id}-title">${icon(it.type)} ${escapeAttr(it.title)}</h3>
+          <div class="meta">
+            <span>Formato: <strong>${it.type}</strong></span>
+            <span>ID: <code>${it.id}</code></span>
+          </div>
+          <div class="actions">
+            <button class="action primary" data-open="${it.urlView}" data-title="${escapeAttr(it.title)}" data-type="${it.type}">▶ Visualizar</button>
+            <a class="action" href="${it.urlDownload}" download rel="noopener noreferrer" target="_blank">⬇ Baixar</a>
+            <button class="action" data-copy="${it.urlView}">⧉ Copiar link</button>
+          </div>
+        </article>
+      `;
+    }
+    function emptyHTML(){
+      return `
+        <article class="card" role="listitem" aria-live="polite">
+          <h3>Nenhum resultado</h3>
+          <p>Tente limpar filtros, alterar termos ou escolher outro tipo de arquivo.</p>
+          <div class="actions"><button class="action" id="emptyReset">↺ Limpar filtros</button></div>
+        </article>
+      `;
+    }
+
+    function titleWithContext(count){
+      const tag = state.filter==="all" ? "Todos" : state.filter.toUpperCase();
+      return `(${count}) ${tag} • Estratégia Integrada de Vendas — Instagram & Redes-Sociais`;
+    }
+
+    function render(){
+      const items = LIBRARY.filter(matches).sort(sortFn);
+      grid.innerHTML = items.map(it => cardHTML(it)).join("") || emptyHTML();
+      document.title = titleWithContext(items.length);
+      if(state.layout==="list") {
+        wrap.classList.add("list");
+        viewList.setAttribute("aria-label", "Exibir em grid");
+        viewList.textContent = "▦";
+      } else {
+        wrap.classList.remove("list");
+        viewList.setAttribute("aria-label", "Exibir em lista");
+        viewList.textContent = "☰";
+      }
+      bindActions();
+      pushURL();
+      saveState();
+    }
+
+    /* =====================================
+       URL SYNC (querystring)
+       ===================================== */
+    function applyFromURL(){
+      const params = new URLSearchParams(location.search);
+      const f = params.get("filter");
+      const s = params.get("sort");
+      const qParam = params.get("q");
+
+      if (f && ["all","pdf","slides","audio"].includes(f)) state.filter = f;
+      if (s && ["date_desc","date_asc","name_asc","name_desc","type_asc"].includes(s)) state.sort = s;
+      if (qParam !== null) state.query = qParam;
+
+      q.value = state.query;
+      sort.value = state.sort;
+    }
+
+    function pushURL(){
+      const params = new URLSearchParams();
+      if (state.filter !== "all") params.set("filter", state.filter);
+      if (state.sort !== "date_desc") params.set("sort", state.sort);
+      if (state.query) params.set("q", state.query);
+      const qs = params.toString();
+      const url = qs ? `${location.pathname}?${qs}${location.hash}` : `${location.pathname}${location.hash}`;
+      history.replaceState(null, "", url);
+    }
+
+    /* =====================================
+       EVENTS
+       ===================================== */
+    function initFilters(){
+      chips.forEach(c => c.setAttribute("aria-pressed", c.dataset.filter===state.filter ? "true":"false"));
+    }
+
+    chips.forEach(ch => ch.addEventListener("click", () => {
+      chips.forEach(c => c.setAttribute("aria-pressed","false"));
+      ch.setAttribute("aria-pressed","true");
+      state.filter = ch.dataset.filter;
+      render();
+    }));
+    q.addEventListener("input", e => { state.query = e.target.value.trim(); render(); });
+    sort.addEventListener("change", e => { state.sort = e.target.value; render(); });
+    resetBtn.addEventListener("click", () => {
+      state = { filter:"all", query:"", sort:"date_desc", layout: state.layout };
+      q.value=""; sort.value="date_desc"; initFilters(); render();
+    });
+
+    // toggle grid/list
+    viewList.addEventListener("click",()=>{
+      state.layout = state.layout==="list" ? "grid" : "list";
+      render();
+    });
+
+    // Delegação para botões dinâmicos
+    function bindActions(){
+      document.querySelectorAll("[data-open]").forEach(btn => {
+        btn.addEventListener("click", () => openPreview(btn.dataset.open, btn.dataset.title, btn.dataset.type, btn));
+      });
+      document.querySelectorAll("[data-copy]").forEach(btn => {
+        btn.addEventListener("click", async () => {
+          try{ await navigator.clipboard.writeText(btn.dataset.copy); notify("Link copiado!"); }
+          catch{ notify("Não foi possível copiar."); }
+        });
+      });
+      const emptyReset = document.getElementById("emptyReset");
+      if(emptyReset){ emptyReset.addEventListener("click", ()=> document.getElementById("resetBtn").click()); }
+    }
+
+    /* =====================================
+       PREVIEW MODAL + FOCO DE RETORNO + TRAP + FALLBACK
+       ===================================== */
+    const modal = document.getElementById("modal");
+    const dialogBody = document.getElementById("dialogBody");
+    const openNew = document.getElementById("openNew");
+    const closeModalBtn = document.getElementById("closeModal");
+    const modalTitle = document.getElementById("modal-title");
+    let lastTrigger = null;
+    let previewTimeout;
+
+    function toViewUrl(u){
+      try{
+        const url = new URL(u);
+        return url.pathname.includes('/preview') ? u.replace('/preview','/view') : u;
+      }catch{ return u; }
+    }
+
+    function openPreview(url, title, type, triggerEl){
+      lastTrigger = triggerEl || document.activeElement;
+      modalTitle.textContent = title;
+      dialogBody.setAttribute("aria-busy","true");
+      dialogBody.innerHTML = `<iframe id="preview" title="Pré-visualização do material"></iframe>`;
+      const ifr = dialogBody.querySelector("#preview");
+      ifr.src = "about:blank";
+      ifr.src = url;
+      openNew.onclick = () => {
+        const view = toViewUrl(url);
+        const w = window.open(view, "_blank");
+        if (w) w.opener = null;
+      };
+      modal.classList.add("open");
+      closeModalBtn.focus();
+
+      clearTimeout(previewTimeout);
+      previewTimeout = setTimeout(()=>{
+        if (dialogBody.getAttribute("aria-busy")==="true") {
+          dialogBody.setAttribute("aria-busy","false");
+          dialogBody.innerHTML = `
+            <div style="display:grid;place-items:center;height:100%;gap:12px;padding:16px;text-align:center">
+              <div style="font-weight:800">Não foi possível carregar o preview aqui.</div>
+              <button class="close" id="fallbackOpen">↗ Abrir em nova aba</button>
+            </div>`;
+          document.getElementById("fallbackOpen").onclick = () => {
+            const v = toViewUrl(url); const w = window.open(v,"_blank"); if (w) w.opener=null;
+          };
+        }
+      }, 6000);
+
+      ifr.addEventListener("load", ()=> {
+        clearTimeout(previewTimeout);
+        dialogBody.setAttribute("aria-busy","false");
+      }, { once:true });
+    }
+
+    function closePreview(){
+      modal.classList.remove("open");
+      dialogBody.innerHTML = ""; // libera memória em mobile
+      if(lastTrigger){ lastTrigger.focus(); lastTrigger = null; }
+    }
+    closeModalBtn.addEventListener("click", closePreview);
+    modal.addEventListener("click", (e)=>{ if(e.target===modal) closePreview(); });
+    document.addEventListener("keydown", (e)=>{
+      if(e.key==="Escape") closePreview();
+      if(e.key==="k" && (e.ctrlKey||e.metaKey)){ e.preventDefault(); q.focus(); }
+      if(e.key==="/" && !/input|textarea|select/i.test(document.activeElement.tagName)){ e.preventDefault(); q.focus(); }
+    });
+
+    // focus trap dentro do modal
+    modal.addEventListener("keydown", (e)=>{
+      if(e.key!=="Tab" || !modal.classList.contains("open")) return;
+      const focusables = modal.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])');
+      if(!focusables.length) return;
+      const first = focusables[0], last = focusables[focusables.length-1];
+      if(e.shiftKey && document.activeElement===first){ e.preventDefault(); last.focus(); }
+      else if(!e.shiftKey && document.activeElement===last){ e.preventDefault(); first.focus(); }
+    });
+
+    /* =====================================
+       TOAST (acessível)
+       ===================================== */
+    function notify(msg){
+      const el = document.createElement("div");
+      el.textContent = msg;
+      el.setAttribute("role","status");
+      el.setAttribute("aria-live","polite");
+      el.style.position="fixed"; el.style.bottom="18px"; el.style.left="50%"; el.style.transform="translateX(-50%)";
+      el.style.background="linear-gradient(135deg, rgba(245,133,41,.95), rgba(221,42,123,.95))";
+      el.style.color="#fff"; el.style.padding="10px 14px"; el.style.borderRadius="12px";
+      el.style.fontWeight="700"; el.style.boxShadow="var(--shadow-m)"; el.style.zIndex="9999";
+      document.body.appendChild(el);
+      setTimeout(()=> el.remove(), 1400);
+    }
+
+    /* =====================================
+       BOOTSTRAP
+       ===================================== */
+    applyFromURL();
+
+    function hydrateUI(){
+      q.value = state.query;
+      sort.value = state.sort;
+      chips.forEach(c => c.setAttribute("aria-pressed", c.dataset.filter===state.filter ? "true":"false"));
+      if(state.layout==="list"){
+        wrap.classList.add("list");
+        viewList.textContent = "▦";
+      } else {
+        wrap.classList.remove("list");
+        viewList.textContent = "☰";
+      }
+    }
+    hydrateUI();
+
+    initFilters();
+    render();
+
+    // Deep link por hash (opcional)
+    window.addEventListener("load", () => {
+      const hash = location.hash.replace("#","");
+      if (hash) {
+        const item = LIBRARY.find(x => x.id === hash);
+        if (item) openPreview(item.urlView, item.title, item.type);
+      }
+    });
+  </script>
+</body>
+</html>
